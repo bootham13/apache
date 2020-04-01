@@ -1,18 +1,18 @@
 apt_update
 
 package 'net-tools' do
- action :install
+  action :install
 end
 
 package 'apache2' do
- action :install
+  action :install
 end
 
 file '/var/www/html/index.html' do
- action :create
- content 'Hello pipeline World!'
+  action :create
+  content 'Hello pipeline World!'
 end
 
 service 'apache2' do
- action [:enable, :start]
+  action [:enable, :start]
 end
