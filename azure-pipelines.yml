@@ -9,3 +9,10 @@ steps:
 - script: |
     echo "First pipeline script"
     echo "Another line of code"
+
+- script: |
+    export CHEF_LICENSE=accept
+    wget https://packages.chef.io/files/stable/chef-workstation_0.17.5-1_amd64.deb
+    sudo dpkg -i chef-workstation_0.17.5.1_amd64.deb
+    chef -f
+  displayName: 'Installing Chef Workstation'
