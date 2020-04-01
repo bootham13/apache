@@ -1,0 +1,10 @@
+trigger:
+  master
+
+pool:
+  vmImage: 'ubuntu-16.04'
+
+steps
+
+- script: |
+    echo "First pipeline script"
