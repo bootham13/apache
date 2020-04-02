@@ -11,3 +11,10 @@ steps:
   displayName: 'Download - Chef Starter kit pem file'
   inputs:
     secureFile: 'srikarpasham.pem'
+
+- script: |
+    echo "Writing $(myChefPem.secureFilePath) to the .chef directory"
+    mkdir .chef
+    sudo ln -s $(myChefPem.secureFilePath) .chef/chefPem
+    ls -la .chef/
+  displayName: 'Writing Chef pem file'
