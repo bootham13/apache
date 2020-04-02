@@ -6,6 +6,9 @@ pool:
 
 steps:
 
+- script: |
+          echo "First Pipeline script"
+
 - task: DownloadSecureFile@1
   name: myInstanceKey
   displayName: 'Download - VM Instance SSH Key'
@@ -24,3 +27,7 @@ steps:
     sudo ln -s $(myInstanceKey.secureFilePath) .chef/vmInstanceKey
     ls -la .chef/
   displayName: 'Writing VM Instance SSH Key'
+
+-script: |
+   /opt/chef-workstation/bin/chef exec cookstyle . --except Layout/EndOfLine 
+ displayName: 'Run Cookstyle'
