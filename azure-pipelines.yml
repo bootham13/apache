@@ -7,6 +7,11 @@ pool:
 steps:
 
 - task: DownloadSecureFile@1
+  name: myChefPem
+  displayName: 'Download - Chef Starter kit pem file'
+  inputs:
+    secureFile: 'srikarpasham.pem'
+
   name: myInstanceKey
   displayName: 'Download - VM Instance SSH Key'
   inputs:
@@ -14,6 +19,19 @@ steps:
 
 - script: |
     echo "First pipeline script"
+    echo "Another line of code"
+
+- script: |
+    export CHEF_LICENSE=accept
+    wget https://packages.chef.io/files/stable/chef-workstation/0.17.5/ubuntu/16.04/chef-workstation_0.17.5-1_amd64.deb
+    sudo dpkg -i chef-workstation_0.17.5-1_amd64.deb
+    chef -v
+  displayName: 'Installing Chef Workstation'
+
+- script: |
+    export CHEF_LICENSE=accept
+    chef gem install kitchen-docker
+  displayName: 'Installing kitchen-docker gem'
 
 - script: |
     echo "Writing $(myChefPem.secureFilePath) to the .chef directory"
