@@ -13,6 +13,13 @@ steps:
     secureFile: 'vm-instance-key.pem'
 
 - script: |
+    echo "Writing $(myChefPem.secureFilePath) to the .chef directory"
+    mkdir .chef
+    sudo ln -s $(myChefPem.secureFilePath) .chef/chefPem
+    ls -la .chef/
+  displayName: 'Writing Chef pem file'
+
+- script: |
     echo "Writing $(myInstanceKey.secureFilePath) to the .chef directory"
     sudo ln -s $(myInstanceKey.secureFilePath) .chef/vmInstanceKey
     ls -la .chef/
