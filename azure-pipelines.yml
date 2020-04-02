@@ -12,11 +12,6 @@ steps:
   inputs:
     secureFile: 'srikarpasham.pem'
 
-  name: myInstanceKey
-  displayName: 'Download - VM Instance SSH Key'
-  inputs:
-    secureFile: 'vm-instance-key.pem'
-
 - script: |
     echo "First pipeline script"
     echo "Another line of code"
