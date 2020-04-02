@@ -30,4 +30,4 @@ steps:
 
 - script: |
    /opt/chef-workstation/bin/chef exec cookstyle . --except Layout/EndOfLine 
- displayName: 'Run Cookstyle'
+  displayName: 'Run Cookstyle'
