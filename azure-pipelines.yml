@@ -6,18 +6,6 @@ pool:
 
 steps:
 
-- task: DownloadSecureFile@1
-  name: myInstanceKey
-  displayName: 'Download - VM Instance SSH Key'
-  inputs:
-    secureFile: 'vm-instance-key.pem'
-
-- task: DownloadSecureFile@1
-  name: myChefPem
-  displayName: 'Download - Chef Starter kit pem file'
-  inputs:
-    secureFile: 'srikarpasham.pem'
-
 - script: |
     echo "First pipeline script"
     echo "Another line of code"
@@ -33,19 +21,6 @@ steps:
     export CHEF_LICENSE=accept
     chef gem install kitchen-docker
   displayName: 'Installing kitchen-docker gem'
-
-- script: |
-    echo "Writing $(myChefPem.secureFilePath) to the .chef directory"
-    mkdir .chef
-    sudo ln -s $(myChefPem.secureFilePath) .chef/chefPem
-    ls -la .chef/
-  displayName: 'Writing Chef pem file'
-
-- script: |
-    echo "Writing $(myInstanceKey.secureFilePath) to the .chef directory"
-    sudo ln -s $(myInstanceKey.secureFilePath) .chef/vmInstanceKey
-    ls -la .chef/
-  displayName: 'Writing VM Instance SSH Key'
 
 - script: |
    /opt/chef-workstation/bin/chef exec cookstyle . --except Layout/EndOfLine 
@@ -71,9 +46,8 @@ steps:
     kitchen destroy
   displayName: 'Destroy the kitchen'
 
-- script: |
-    rm Policyfile.lock.json
-    chef install Policyfile.rb -c .chef/knife.rb
-    chef push prod Policyfile.lock.json -c .chef/knife.rb
-    knife ssh policy_name:apache -a cloud.public_ipv4 -x ubuntu -i .chef/vmInstanceKey 'sudo chef-client'
-  displayName: 'Pushing cookbook to Chef server, converging nodes'
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish cookbook to Release pipeline'
+  inputs:
+    PathtoPublish: '$(System.DefaultWorkingDirectory)'
+
