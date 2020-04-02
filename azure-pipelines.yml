@@ -11,6 +11,7 @@ steps:
   displayName: 'Download - VM Instance SSH Key'
   inputs:
     secureFile: 'vm-instance-key.pem'
+
 - script: |
     echo "First pipeline script"
 
