@@ -44,3 +44,23 @@ steps:
 - script: |
    /opt/chef-workstation/bin/chef exec cookstyle . --except Layout/EndOfLine 
   displayName: 'Run Cookstyle'
+
+- script: | 
+    kitchen destroy
+  displayName: 'Destroy any existing kitchen'
+
+- script: |
+    kitchen create
+  displayName: 'Create a new kitchen'
+
+- script: | 
+    kitchen converge
+  displayName: 'Converge the new kitchen'
+
+- script: |
+    kitchen verify
+  displayName: 'verify your tests against the new kitchen'
+
+- script: |
+    kitchen destroy
+  displayName: 'Destroy the kitchen'
