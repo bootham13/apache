@@ -10,7 +10,7 @@ end
 
 file '/var/www/html/index.html' do
   action :create
-  content 'Hello pipeline World!'
+  content '/Hello pipeline World!/'
 end
 
 service 'apache2' do
