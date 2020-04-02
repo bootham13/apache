@@ -28,6 +28,6 @@ steps:
     ls -la .chef/
   displayName: 'Writing VM Instance SSH Key'
 
--script: |
+- script: |
    /opt/chef-workstation/bin/chef exec cookstyle . --except Layout/EndOfLine 
  displayName: 'Run Cookstyle'
