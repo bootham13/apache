@@ -7,6 +7,12 @@ pool:
 steps:
 
 - task: DownloadSecureFile@1
+  name: myInstanceKey
+  displayName: 'Download - VM Instance SSH Key'
+  inputs:
+    secureFile: 'vm-instance-key.pem'
+
+- task: DownloadSecureFile@1
   name: myChefPem
   displayName: 'Download - Chef Starter kit pem file'
   inputs:
