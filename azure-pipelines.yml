@@ -70,3 +70,10 @@ steps:
 - script: |
     kitchen destroy
   displayName: 'Destroy the kitchen'
+
+- script: |
+    rm Policyfile.lock.json
+    chef install Policyfile.rb -c .chef/knife.rb
+    chef push prod Policy.lock.json -c .chef/knife.rb
+    knife ssh policy_name:apache -a cloud.public_ipv4 -x ubuntu -i .chef/vmInstanceKey 'sudo chef-client'
+  displayName: 'Pushing cookbook to Chef server, converging nodes'
