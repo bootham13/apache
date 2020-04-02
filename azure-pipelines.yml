@@ -7,14 +7,13 @@ pool:
 steps:
 
 - task: DownloadSecureFile@1
-  name: myChefPem
-  displayName: 'Download - Chef Starter kit pem file'
+  name: myInstanceKey
+  displayName: 'Download - VM Instance SSH Key'
   inputs:
-    secureFile: 'srikarpasham.pem'
+    secureFile: 'vm-instance-key.pem'
 
 - script: |
-    echo "Writing $(myChefPem.secureFilePath) to the .chef directory"
-    mkdir .chef
-    sudo ln -s $(myChefPem.secureFilePath) .chef/chefPem
+    echo "Writing $(myInstanceKey.secureFilePath) to the .chef directory"
+    sudo ln -s $(myInstanceKey.secureFilePath) .chef/chefPem
     ls -la .chef/
-  displayName: 'Writing Chef pem file'
+  displayName: 'Writing VM Instance SSH Key'
