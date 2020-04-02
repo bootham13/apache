@@ -14,6 +14,6 @@ steps:
 
 - script: |
     echo "Writing $(myInstanceKey.secureFilePath) to the .chef directory"
-    sudo ln -s $(myInstanceKey.secureFilePath) .chef/chefPem
+    sudo ln -s $(myInstanceKey.secureFilePath) .chef/vmInstanceKey
     ls -la .chef/
   displayName: 'Writing VM Instance SSH Key'
