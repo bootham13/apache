@@ -6,14 +6,13 @@ pool:
 
 steps:
 
-- script: |
-          echo "First Pipeline script"
-
 - task: DownloadSecureFile@1
   name: myInstanceKey
   displayName: 'Download - VM Instance SSH Key'
   inputs:
     secureFile: 'vm-instance-key.pem'
+- script: |
+    echo "First pipeline script"
 
 - script: |
     echo "Writing $(myChefPem.secureFilePath) to the .chef directory"
